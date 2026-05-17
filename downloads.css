@@ -1,0 +1,426 @@
+/* ============================================================
+   DOWNLOADS.CSS — Galeria de materiais e página de detalhe
+   ============================================================ */
+
+/* Link ativo na navbar (página atual) */
+.nav-links a.active {
+  color: var(--accent);
+}
+
+/* ---------- Hero da galeria ---------- */
+.downloads-hero {
+  padding: 140px 0 40px;
+  background: var(--gradient-hero);
+  text-align: center;
+}
+
+.downloads-hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.downloads-hero p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 620px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ---------- Grid de materiais ---------- */
+.downloads-section {
+  padding: 40px 0 80px;
+}
+
+.downloads-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* ---------- Card de material ---------- */
+.download-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  transition: var(--transition);
+  text-decoration: none;
+  color: inherit;
+}
+
+.download-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+.download-card-thumb {
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg,
+              rgba(99, 102, 241, 0.18) 0%,
+              rgba(99, 102, 241, 0.04) 100%);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.download-card-thumb i {
+  font-size: 3rem;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.download-card-format {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.download-card-body {
+  padding: 22px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.download-card-category {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.download-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.download-card-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.download-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 6px;
+  transition: gap 0.2s ease;
+}
+
+.download-card:hover .download-card-cta {
+  gap: 12px;
+}
+
+/* ---------- CTA de newsletter no fim da galeria ---------- */
+.downloads-newsletter-cta {
+  margin-top: 64px;
+  padding: 40px;
+  text-align: center;
+  border-color: rgba(99, 102, 241, 0.25);
+  background: linear-gradient(135deg,
+              rgba(99, 102, 241, 0.08) 0%,
+              rgba(99, 102, 241, 0.02) 100%);
+}
+
+.downloads-newsletter-cta h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.downloads-newsletter-cta p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 24px;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   PÁGINA DE DETALHE DE UM MATERIAL
+   ============================================================ */
+
+.material-hero {
+  padding: 140px 0 50px;
+  background: var(--gradient-hero);
+}
+
+.material-hero-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.material-cover {
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg,
+              rgba(99, 102, 241, 0.22) 0%,
+              rgba(99, 102, 241, 0.04) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.material-cover i {
+  font-size: 4.5rem;
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.material-cover-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(10, 10, 10, 0.7);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 4px 10px;
+  border-radius: 100px;
+  backdrop-filter: blur(8px);
+}
+
+.material-info .material-category {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.material-info h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 4.2vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.material-info .material-subtitulo {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.material-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  background: var(--gradient-accent);
+  color: #0A0A0A;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+  box-shadow: var(--shadow-glow);
+}
+
+.material-download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px var(--accent-glow);
+}
+
+.material-download-btn i {
+  font-size: 1.1rem;
+}
+
+/* ---------- Conteúdo da página de material ---------- */
+
+.material-conteudo {
+  padding: 30px 0 80px;
+}
+
+.material-blocos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.material-bloco {
+  padding: 32px;
+}
+
+.material-bloco h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.material-bloco h2 i {
+  color: var(--accent);
+}
+
+.material-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.material-lista li {
+  font-size: 0.93rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  padding-left: 22px;
+  position: relative;
+}
+
+.material-lista li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.material-bloco p {
+  font-size: 0.93rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* ---------- Bloco grande de Newsletter ---------- */
+.material-newsletter {
+  padding: 44px;
+  text-align: center;
+  border-color: rgba(99, 102, 241, 0.3);
+  background: linear-gradient(135deg,
+              rgba(99, 102, 241, 0.10) 0%,
+              rgba(99, 102, 241, 0.02) 100%);
+  margin-bottom: 40px;
+}
+
+.material-newsletter .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 18px;
+}
+
+.material-newsletter h2 {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.material-newsletter p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 24px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ---------- Navegação rodapé ---------- */
+.material-nav {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width: 768px) {
+  .downloads-hero {
+    padding: 120px 0 30px;
+  }
+
+  .downloads-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .material-hero {
+    padding: 120px 0 40px;
+  }
+
+  .material-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    text-align: center;
+  }
+
+  .material-cover {
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  .material-blocos {
+    grid-template-columns: 1fr;
+  }
+
+  .material-newsletter {
+    padding: 32px 24px;
+  }
+
+  .material-nav {
+    flex-direction: column;
+  }
+
+  .material-nav .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .downloads-newsletter-cta {
+    padding: 32px 24px;
+  }
+}
