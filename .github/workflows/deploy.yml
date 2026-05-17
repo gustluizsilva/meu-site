@@ -32,6 +32,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: ${{ secrets.FTP_SERVER_DIR }}
           local-dir: ./
+          # Arquivos locais que NAO devem subir (e arquivos no servidor que NAO devem ser deletados)
           exclude: |
             **/.git*
             **/.git*/**
@@ -44,3 +45,11 @@ jobs:
             **/.vscode/**
             **/.idea/**
             **/*.log
+            # Arquivos do servidor HostGator/cPanel que devem ser preservados:
+            **/.htaccess
+            **/.well-known/**
+            **/.ftpquota
+            **/cgi-bin/**
+            **/error_log
+            **/php.ini
+            **/.user.ini
