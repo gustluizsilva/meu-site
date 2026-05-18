@@ -1,0 +1,343 @@
+/* ============================================================
+   PROMPTS.CSS — Biblioteca de prompts
+   ============================================================ */
+
+/* Link ativo na navbar */
+.nav-links a.active {
+  color: var(--accent);
+}
+
+/* ---------- Hero ---------- */
+.prompts-hero {
+  padding: 140px 0 40px;
+  background: var(--gradient-hero);
+  text-align: center;
+}
+
+.prompts-hero h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.prompts-hero p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ---------- Filtros (chips) ---------- */
+.prompts-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 32px 0 48px;
+}
+
+.filter-chip {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.filter-chip:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
+.filter-chip.active {
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.4);
+  color: var(--accent);
+}
+
+/* ---------- Seção dos cards ---------- */
+.prompts-section {
+  padding: 0 0 80px;
+}
+
+.prompts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ---------- Card de prompt ---------- */
+.prompt-card {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.prompt-card-header {
+  padding: 28px 32px 20px;
+}
+
+.prompt-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.prompt-category {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.prompt-model {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.prompt-model i {
+  font-size: 0.7rem;
+}
+
+.prompt-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.prompt-desc {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+/* Variáveis a preencher */
+.prompt-variables {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+}
+
+.variables-label {
+  color: var(--text-muted);
+  margin-right: 4px;
+}
+
+.variable-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 3px 9px;
+  border-radius: 100px;
+  font-size: 0.74rem;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+}
+
+/* ---------- Bloco de código do prompt ---------- */
+.prompt-body {
+  position: relative;
+  background: #0d0d0d;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.prompt-code {
+  max-height: 420px;
+  overflow-y: auto;
+  padding: 22px 28px;
+  margin: 0;
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Fira Code', monospace;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: #d4d4d4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.prompt-code code {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  padding: 0;
+  border: 0;
+}
+
+/* Scrollbar customizada no bloco de prompt */
+.prompt-code::-webkit-scrollbar {
+  width: 8px;
+}
+
+.prompt-code::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.prompt-code::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+}
+
+.prompt-code::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Gradiente sutil no rodapé do code block pra indicar scroll */
+.prompt-body::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 32px;
+  background: linear-gradient(to bottom, rgba(13, 13, 13, 0) 0%, #0d0d0d 100%);
+  pointer-events: none;
+}
+
+/* ---------- Ações (botão copiar) ---------- */
+.prompt-actions {
+  padding: 20px 28px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gradient-accent);
+  color: #0A0A0A;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 11px 22px;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 0 0 var(--accent-glow);
+}
+
+.btn-copy:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px var(--accent-glow);
+}
+
+.btn-copy:active {
+  transform: translateY(0);
+}
+
+.btn-copy.copied {
+  background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+  color: #FFFFFF;
+}
+
+.btn-copy i {
+  font-size: 0.95rem;
+}
+
+/* Mensagem quando nenhum prompt corresponde ao filtro */
+.prompts-empty {
+  display: none;
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--text-secondary);
+}
+
+.prompts-empty.show {
+  display: block;
+}
+
+/* ---------- Newsletter CTA ---------- */
+.prompts-newsletter-cta {
+  margin-top: 56px;
+  padding: 40px;
+  text-align: center;
+  border-color: rgba(99, 102, 241, 0.25);
+  background: linear-gradient(135deg,
+              rgba(99, 102, 241, 0.08) 0%,
+              rgba(99, 102, 241, 0.02) 100%);
+}
+
+.prompts-newsletter-cta h2 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.prompts-newsletter-cta p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 24px;
+  max-width: 540px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width: 768px) {
+  .prompts-hero {
+    padding: 120px 0 30px;
+  }
+
+  .prompts-filters {
+    margin: 24px 0 32px;
+  }
+
+  .prompt-card-header {
+    padding: 22px 22px 16px;
+  }
+
+  .prompt-code {
+    padding: 18px 22px;
+    font-size: 0.78rem;
+  }
+
+  .prompt-actions {
+    padding: 16px 22px;
+    justify-content: stretch;
+  }
+
+  .btn-copy {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .prompt-title {
+    font-size: 1.2rem;
+  }
+
+  .prompts-newsletter-cta {
+    padding: 32px 24px;
+  }
+}

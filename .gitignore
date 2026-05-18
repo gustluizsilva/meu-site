@@ -11,3 +11,7 @@
 
 # Logs
 *.log
+
+# Playwright artefatos de teste local
+.playwright-mcp/
+live-*.png
