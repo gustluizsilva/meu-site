@@ -124,6 +124,20 @@
                 mais oportunidades inbound qualificadas.
               </p>
 
+              <div class="prompt-how-to">
+                <h3 class="how-to-title">
+                  <i class="fa-solid fa-route" aria-hidden="true"></i>
+                  Como usar
+                </h3>
+                <ol class="how-to-steps">
+                  <li>Tire screenshots do seu LinkedIn (topo, sobre, últimas experiências, destaques).</li>
+                  <li>Copie o prompt abaixo e cole no Claude.</li>
+                  <li>Preencha o bloco "CONTEXTO" no final (área, cargo, diferenciais).</li>
+                  <li>Anexe os screenshots e envie.</li>
+                  <li>Salve o HTML que ele retorna e exporte como PDF.</li>
+                </ol>
+              </div>
+
               <div class="prompt-variables">
                 <span class="variables-label">Variáveis a preencher:</span>
                 <span class="variable-pill">área de atuação</span>
@@ -223,7 +237,12 @@ exportar PDF. Paleta editorial: fundo creme, tinta escura, 1 acento.</code></pre
             </div>
 
             <footer class="prompt-actions">
-              <button class="btn-copy" data-target="prompt-linkedin-diagnostico" type="button" aria-label="Copiar prompt">
+              <div class="prompt-counter" aria-label="Total de cópias deste prompt">
+                <i class="fa-solid fa-copy" aria-hidden="true"></i>
+                <span class="counter-value" data-counter-id="prompt-linkedin-diagnostico">0</span>
+                <span>cópias</span>
+              </div>
+              <button class="btn-copy" data-target="prompt-linkedin-diagnostico" data-counter-id="prompt-linkedin-diagnostico" type="button" aria-label="Copiar prompt">
                 <i class="fa-solid fa-copy" aria-hidden="true"></i>
                 <span>Copiar prompt</span>
               </button>
@@ -231,8 +250,15 @@ exportar PDF. Paleta editorial: fundo creme, tinta escura, 1 acento.</code></pre
           </article>
 
           <!-- Próximos prompts: duplique a estrutura <article class="prompt-card"> acima.
-               Lembrete: atualize data-category, id do <code>, data-target do botão,
-               e adicione o chip da nova categoria nos filtros se for inédita. -->
+               Checklist do que atualizar pra cada novo prompt:
+                 - data-category do <article>
+                 - Categoria visível, título, descrição
+                 - Bloco "Como usar" (lista <ol> com 3-6 passos curtos)
+                 - Variáveis (pills no .prompt-variables)
+                 - id do <code> (use um slug único, ex: prompt-resumo-reuniao)
+                 - data-target do botão Copiar (mesmo id do <code>)
+                 - data-counter-id em DOIS lugares (span do contador e botão Copiar)
+                 - Adicione chip novo nos filtros se for categoria inédita. -->
 
         </div>
 

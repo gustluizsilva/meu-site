@@ -134,6 +134,68 @@
   margin-bottom: 18px;
 }
 
+/* "Como usar" — lista numerada de passos */
+.prompt-how-to {
+  margin: 22px 0 18px;
+  padding: 18px 22px;
+  background: rgba(99, 102, 241, 0.05);
+  border: 1px solid rgba(99, 102, 241, 0.15);
+  border-radius: var(--radius-sm);
+}
+
+.how-to-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.how-to-title i {
+  font-size: 0.8rem;
+}
+
+.how-to-steps {
+  list-style: none;
+  counter-reset: step;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.how-to-steps li {
+  counter-increment: step;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  padding-left: 30px;
+  position: relative;
+}
+
+.how-to-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* Variáveis a preencher */
 .prompt-variables {
   display: flex;
@@ -218,13 +280,47 @@
   pointer-events: none;
 }
 
-/* ---------- Ações (botão copiar) ---------- */
+/* ---------- Ações (contador + botão copiar) ---------- */
 .prompt-actions {
   padding: 20px 28px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
+}
+
+.prompt-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.prompt-counter i {
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.counter-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--text-primary);
+  min-width: 1ch;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.counter-value.bump {
+  animation: counter-bump 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes counter-bump {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25); color: var(--accent); }
+  100% { transform: scale(1); }
 }
 
 .btn-copy {
@@ -325,12 +421,26 @@
 
   .prompt-actions {
     padding: 16px 22px;
-    justify-content: stretch;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .prompt-counter {
+    justify-content: center;
   }
 
   .btn-copy {
     width: 100%;
     justify-content: center;
+  }
+
+  .prompt-how-to {
+    padding: 16px 18px;
+  }
+
+  .how-to-steps li {
+    font-size: 0.86rem;
   }
 
   .prompt-title {

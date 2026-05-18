@@ -53,3 +53,5 @@ jobs:
             **/error_log
             **/php.ini
             **/.user.ini
+            # Dados gerados em runtime pelo PHP — NUNCA sobrescrever
+            **/counters.json
