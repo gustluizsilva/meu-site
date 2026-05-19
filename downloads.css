@@ -120,19 +120,76 @@
   flex: 1;
 }
 
+.download-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.download-card-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.download-card-counter i {
+  color: var(--accent);
+  font-size: 0.78rem;
+}
+
 .download-card-cta {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--accent);
-  margin-top: 6px;
   transition: gap 0.2s ease;
 }
 
 .download-card:hover .download-card-cta {
-  gap: 12px;
+  gap: 10px;
+}
+
+/* Contador da página de detalhe (abaixo do botão de download) */
+.material-counter {
+  margin-top: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.material-counter i {
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
+/* Animação "bump" reaproveitada do prompts.css. Se essa página de
+   detalhe não importar prompts.css, definimos os keyframes aqui. */
+.counter-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.counter-value.bump {
+  animation: counter-bump 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes counter-bump {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25); color: var(--accent); }
+  100% { transform: scale(1); }
 }
 
 /* ---------- CTA de newsletter no fim da galeria ---------- */

@@ -1,13 +1,11 @@
 /* ============================================================
-   PROMPTS.JS — Copy-to-clipboard + Filtro + Contador de cópias
+   PROMPTS.JS — Copy-to-clipboard + Filtro por categoria
+   ----
+   Os contadores (load/increment) vivem em counter-client.js,
+   que precisa ser carregado ANTES deste arquivo.
    ============================================================ */
 
-const COUNTER_ENDPOINT = 'counter.php';
-
 document.addEventListener('DOMContentLoaded', () => {
-
-  // ---------- Carregar contagens iniciais ----------
-  carregarContagens();
 
   // ---------- Copiar prompt ----------
   document.querySelectorAll('.btn-copy').forEach(btn => {
@@ -21,9 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const sucesso = await copiarParaClipboard(codeText, codeEl);
       if (sucesso) {
         mostrarFeedbackCopia(btn);
-        // Incrementa contador no servidor (e atualiza UI)
+        // Incrementa contador via cliente compartilhado
         const counterId = btn.dataset.counterId;
-        if (counterId) incrementarContador(counterId);
+        if (counterId && typeof window.incrementCounter === 'function') {
+          window.incrementCounter(counterId);
+        }
       }
     });
   });
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================================
-// Funções auxiliares
+// Auxiliares de cópia (não relacionadas a contador)
 // ============================================================
 
 async function copiarParaClipboard(texto, codeEl) {
@@ -98,48 +98,4 @@ function mostrarFeedbackCopia(btn) {
     label.textContent = originalLabel;
     btn.classList.remove('copied');
   }, 2000);
-}
-
-async function carregarContagens() {
-  try {
-    const res = await fetch(COUNTER_ENDPOINT, { method: 'GET' });
-    if (!res.ok) return;
-    const data = await res.json();
-    if (data && typeof data === 'object') {
-      Object.keys(data).forEach(id => {
-        atualizarDisplayContador(id, data[id], false);
-      });
-    }
-  } catch (err) {
-    // Falha silenciosa — contador é não-crítico, página segue funcionando
-  }
-}
-
-async function incrementarContador(id) {
-  try {
-    const res = await fetch(COUNTER_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id })
-    });
-    if (!res.ok) return;
-    const data = await res.json();
-    if (data && typeof data.count === 'number') {
-      atualizarDisplayContador(id, data.count, true);
-    }
-  } catch (err) {
-    // Falha silenciosa
-  }
-}
-
-function atualizarDisplayContador(id, valor, animar) {
-  const el = document.querySelector(`.counter-value[data-counter-id="${id}"]`);
-  if (!el) return;
-  el.textContent = valor;
-  if (animar) {
-    el.classList.remove('bump');
-    // Força reflow pra reiniciar a animação
-    void el.offsetWidth;
-    el.classList.add('bump');
-  }
 }
