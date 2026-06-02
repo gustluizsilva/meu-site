@@ -1520,8 +1520,8 @@ strong {
     font-size: 0.82rem;
   }
 
-  /* Em telas muito pequenas, oculta o texto e deixa só o ícone do Newsletter */
-  @media (max-width: 420px) {
+  /* Em telas muito pequenas (320px), oculta o texto e deixa só o ícone do Newsletter */
+  @media (max-width: 340px) {
     .nav-cta-standalone span {
       display: none;
     }
