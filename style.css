@@ -300,23 +300,26 @@ strong {
   padding: 0 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
 }
 
-/* Logo */
+/* Logo (zona esquerda) */
 .nav-logo {
   font-family: var(--font-heading);
   font-weight: 800;
   font-size: 1.4rem;
   color: var(--text-primary);
   letter-spacing: -0.02em;
+  flex-shrink: 0;
 }
 
-/* Links de navegação */
+/* Links de navegação (zona central) */
 .nav-links {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  flex: 1;
 }
 
 .nav-links a {
@@ -332,7 +335,7 @@ strong {
   background: rgba(255,255,255,0.05);
 }
 
-/* CTA da navbar */
+/* CTA da navbar (estilo antigo — mantido caso ainda apareça em algum link inline do menu) */
 .nav-cta {
   background: var(--accent) !important;
   color: #fff !important;
@@ -342,6 +345,32 @@ strong {
 .nav-cta:hover {
   background: var(--accent-hover) !important;
   box-shadow: 0 0 16px var(--accent-glow) !important;
+}
+
+/* CTA standalone — Newsletter destacada à direita (zona direita) */
+.nav-cta-standalone {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.nav-cta-standalone:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 0 16px var(--accent-glow);
+  transform: translateY(-1px);
+}
+
+.nav-cta-standalone i {
+  font-size: 0.85rem;
 }
 
 /* Botão hamburguer — mobile */
@@ -1471,6 +1500,7 @@ strong {
     gap: 4px;
     border-left: 1px solid var(--border);
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex: none; /* anula flex:1 do desktop quando vira slide-out */
   }
 
   .nav-links.open {
@@ -1481,6 +1511,23 @@ strong {
     width: 100%;
     padding: 12px 16px;
     font-size: 1rem;
+  }
+
+  /* Empurra Newsletter + hamburger pra direita já que nav-links saiu do flow */
+  .nav-cta-standalone {
+    margin-left: auto;
+    padding: 6px 14px;
+    font-size: 0.82rem;
+  }
+
+  /* Em telas muito pequenas, oculta o texto e deixa só o ícone do Newsletter */
+  @media (max-width: 420px) {
+    .nav-cta-standalone span {
+      display: none;
+    }
+    .nav-cta-standalone {
+      padding: 8px 12px;
+    }
   }
 
   .nav-toggle {
