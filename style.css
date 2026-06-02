@@ -1908,24 +1908,38 @@ strong {
 }
 
 /* ============================================================
-   SEÇÃO RECURSOS GRATUITOS — Downloads + Prompts em destaque
+   SEÇÃO RECURSOS GRATUITOS — Downloads + Prompts + AI PM Playbook
    ============================================================ */
 .recursos-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 22px;
-  max-width: 900px;
-  margin: 0 auto;
 }
 
 .recurso-card {
-  padding: 36px 32px;
+  padding: 32px 28px;
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   transition: var(--transition);
+  position: relative;
+}
+
+.recurso-card-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  padding: 4px 10px;
+  border-radius: 100px;
 }
 
 .recurso-card:hover {
@@ -2048,6 +2062,19 @@ strong {
 
   .recursos-grid {
     grid-template-columns: 1fr;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .curso-card {
+    grid-template-columns: 1fr !important;
+  }
+
+  .curso-card-cta-box {
+    border-left: none !important;
+    border-top: 1px solid var(--border) !important;
+    padding-left: 0 !important;
+    padding-top: 32px !important;
   }
 }
 
@@ -2078,6 +2105,157 @@ strong {
 
   .stack-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   SEÇÃO CURSO CLAUDE PM — produto pago, layout CTA forte
+   ============================================================ */
+.curso-card {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 48px;
+  padding: 48px;
+  border-color: rgba(99, 102, 241, 0.3);
+  background: linear-gradient(135deg,
+              rgba(99, 102, 241, 0.10) 0%,
+              rgba(99, 102, 241, 0.02) 100%);
+  align-items: center;
+}
+
+.curso-card-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.curso-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  padding: 6px 14px;
+  border-radius: 100px;
+  align-self: flex-start;
+}
+
+.curso-titulo {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.curso-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.curso-beneficios {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.curso-beneficios li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.curso-beneficios li i {
+  color: var(--accent);
+  font-size: 0.85rem;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.curso-card-cta-box {
+  padding-left: 32px;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.curso-preco {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.curso-preco-valor {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.curso-preco-detalhe {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.curso-meta {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.curso-meta li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.curso-meta li i {
+  color: var(--accent);
+  font-size: 0.85rem;
+  width: 16px;
+  text-align: center;
+}
+
+.curso-btn {
+  margin-top: 4px;
+}
+
+.curso-aviso {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  .curso-card {
+    padding: 32px 24px;
+    gap: 28px;
+  }
+
+  .curso-preco-valor {
+    font-size: 2.2rem;
   }
 }
 

@@ -1,210 +1,113 @@
-# CLAUDE.md — Briefing do Site Pessoal do Gustavo Luiz
+# CLAUDE.md
 
-## Sobre o Projeto
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-Site pessoal e portfólio profissional de Gustavo Luiz da Silva.
-Funciona como um **currículo online vivo** — sempre atualizado com projetos, certificações e conteúdos novos.
-O público principal são **recrutadores**, parceiros de negócio e a comunidade de produto & IA.
+## O projeto em uma linha
 
----
+Site pessoal + portfólio do Gustavo Luiz (PM em transição pra AI Product Builder) hospedado no HostGator em `https://www.gustluiz.com.br`. Estático (HTML/CSS/JS) com um único endpoint PHP pra contadores. Comentários e nomes de classe sempre em **português**.
 
-## Sobre o Gustavo
+## Sem build, sem deps locais
 
-- **Nome completo:** Gustavo Luiz da Silva
-- **Nacionalidade:** Brasileiro, 37 anos, casado
-- **Localização:** Brasil
-- **Email:** gu.ufabc@gmail.com
-- **LinkedIn:** https://www.linkedin.com/in/gustavoluizsilva/
+- Não há `npm install`, build step, lint ou test suite. Edita arquivo → push → o site atualiza.
+- Pra testar local, abre o arquivo no navegador (`open index.html`). O contador só funciona ao vivo (precisa do PHP no servidor).
+- Pra validar rapidamente ao vivo após push:
+  - `curl -s -o /dev/null -w "%{http_code}\n" https://www.gustluiz.com.br/<arquivo>` — checa se subiu
+  - `curl -s https://www.gustluiz.com.br/counter.php` — JSON com todas contagens atuais
+- Verificação visual end-to-end: usar Playwright MCP (`mcp__playwright__browser_navigate` + screenshot).
 
-### Posicionamento profissional
+## Deploy automático
 
-Product Manager com mais de 12 anos de experiência em produtos financeiros e soluções de crédito para empresas. Agora em transição estratégica: **aprendendo IA para desenvolver produtos** e se tornando referência nesse tema no LinkedIn e comunidade de produto.
+`.github/workflows/deploy.yml` dispara em `push` na `main` (ou manual via `gh workflow run deploy.yml`). Faz FTP-sync do repo pra `/home2/engen736/public_html/gustluiz.com.br/` no HostGator.
 
-**Headline sugerida para o site:**
-> "Product Manager → AI Product Builder | Transformando experiência em produtos inteligentes"
+**Acompanhar:** `gh run watch <run-id> --repo gustluizsilva/meu-site --exit-status`
 
----
+### Arquivos NUNCA enviados pelo deploy (exclude no workflow)
 
-## Experiência Profissional
+Estes são gerados/gerenciados no servidor — sobrescrever quebraria o site:
 
-### Itaú BBA — Product Manager, Plataforma de Crédito PJ (2022 – Abril 2026)
-- Carteira superior a R$100 bilhões, atendendo +15 mil empresas (faturamento R$50M–R$500M)
-- Migração de mainframe para cloud (AWS) sem impacto aos clientes
-- Elevou eficiência de alocação de crédito de 47% para 85%
-- Jornadas digitais que aceleraram a concessão de crédito e reduziram dependências operacionais
-- Atuou na interseção entre negócio, risco e tecnologia
+- `**/.htaccess` — config do Apache pra esse domínio, inclui o handler PHP. **Foi editado manualmente uma vez** pra remover diretivas que desabilitavam PHP (`RemoveHandler .php`, `Options -ExecCGI`). Não tentar re-adicionar.
+- `**/counters.json` — dados de contagens persistentes
+- `**/.well-known/**` — verificação SSL Let's Encrypt
+- `**/CLAUDE.md`, `.github/`, `.claude/`, `Substack/` — arquivos internos do repo
 
-### Itaú BBA — Analista de Crédito, Produto & UX (2018 – 2022)
-- Reduziu fluxo de contratação de crédito de 14 telas para 3 etapas (–7 min por operação)
-- Discovery completo: entrevistas, testes e prototipação
-- Digitalizou comitês de crédito
-- Estruturou a prática de UX Design na diretoria de Atacado
+### Setup HostGator (uma vez, já feito)
 
-### Itaú Unibanco — Analista de Negócios, Produtos de Crédito (2014 – 2018)
-- Autosserviço de crédito no bankline
-- Soluções de mobilidade para gerentes
-- Introdução de práticas ágeis e Design Thinking
+Pra futuras dúvidas / debug:
 
----
+- FTP user `github-deploy@gustluiz.com.br` jailed em `public_html/gustluiz.com.br/` (NÃO em `/home2/engen736/gustluiz.com.br/`, que existe mas não serve URL nenhuma — engano comum)
+- `FTP_SERVER_DIR` no GitHub Secrets = `/` (relativo à jail)
+- MultiPHP Manager: `gustluiz.com.br` setado explicitamente em **PHP 8.3** (não "Inherited"). Inherited não escreve o handler no Apache config.
 
-## Experimentação com IA (destaque especial)
+## Sistema de contadores
 
-- **Automação de leitura de balanços:** reduziu tempo de 50–60 min para ~10 min, com ~90% de acurácia — validado em 15 dias
-- **Hipótese de IA para distribuição de limites de crédito:** usando histórico de contratação e perfil de risco para sugerir alocações mais eficientes
-
----
-
-## Formação Acadêmica
-
-- MBA em Finanças — FGV
-- Pós-graduação em Administração de Empresas — FGV
-- Engenharia de Gestão — UFABC
-
-## Certificações
-
-- Google Project Management (2026)
-- Google UX Design (2022)
-- *(seção deve ser atualizada frequentemente com novas certificações)*
-
----
-
-## Objetivos do Site
-
-1. Ser um **currículo online moderno** e sempre atualizado
-2. Apresentar Gustavo como referência em **IA aplicada a produtos**
-3. Centralizar todos os canais e conteúdos em um só lugar
-4. Atrair **recrutadores** e parceiros estratégicos
-5. Ser hub de links para todos os seus canais digitais
-
----
-
-## Estrutura de Páginas e Seções
-
-### Página Principal (index.html)
-
-1. **Hero Section**
-   - Nome grande: "Gustavo Luiz"
-   - Headline: "Product Manager → AI Product Builder"
-   - Frase curta de posicionamento
-   - Botões de CTA: "Ver Projetos" e "Entre em contato"
-   - Links para redes sociais (ícones)
-
-2. **Sobre mim**
-   - Resumo profissional adaptado
-   - Foco na transição para IA
-   - Foto profissional (placeholder até Gustavo adicionar)
-
-3. **Experimentação com IA** *(seção de destaque)*
-   - Cards com os projetos de IA já realizados
-   - Resultados numéricos em destaque
-
-4. **Experiência Profissional**
-   - Timeline visual com empresas, cargos e períodos
-   - Logos das empresas se disponíveis
-
-5. **Formação e Certificações**
-   - Cards de certificações com data
-   - Seção pensada para ser facilmente atualizada
-
-6. **Meus Canais** *(Hub de Links)*
-   - Cards linkando para: LinkedIn, Newsletter, YouTube, Instagram
-   - Design tipo "link in bio" mas elegante
-
-7. **Contato**
-   - Email: gu.ufabc@gmail.com
-   - LinkedIn
-   - Formulário de contato simples (opcional)
-
----
-
-## Links e Canais (atualizar quando tiver as URLs)
-
-- **LinkedIn:** https://www.linkedin.com/in/gustavoluizsilva/
-- **Newsletter:** *(URL a adicionar)*
-- **YouTube:** *(URL a adicionar)*
-- **Instagram:** *(URL a adicionar)*
-- **Email:** gu.ufabc@gmail.com
-
----
-
-## Design e Visual
-
-### Identidade Visual
-- **Estilo:** Moderno, minimalista, elegante, tech
-- **Tom:** Profissional mas acessível — não corporativo demais
-- **Referência de estilo:** Sites de developers/PMs modernos (Linear, Vercel, Raycast)
-
-### Paleta de Cores
-- **Fundo principal:** #0A0A0A (preto quase puro)
-- **Fundo secundário (cards):** #111111 ou #1A1A1A
-- **Cor de destaque (accent):** #6366F1 (roxo índigo vibrante) — ou ajustar conforme preferência
-- **Texto principal:** #F5F5F5 (branco suave)
-- **Texto secundário:** #A3A3A3 (cinza médio)
-- **Bordas sutis:** #2A2A2A
-
-### Tipografia
-- **Título (headings):** "Inter" ou "Plus Jakarta Sans" — bold, impactante
-- **Corpo do texto:** "Inter" — legível, moderno
-- Fonte via Google Fonts
-
-### Componentes Visuais
-- Cards com borda sutil e leve efeito glass (glassmorphism leve)
-- Gradiente sutil no hero (roxo/azul escuro)
-- Hover effects suaves nos botões e cards
-- Animações de entrada (fade-in ao rolar a página)
-- Números de impacto em destaque (ex: "R$100B+", "85%", "–7 min")
-
----
-
-## Stack Técnica
-
-- **HTML5** semântico e acessível
-- **CSS3** com variáveis CSS (`:root`) para fácil personalização de cores
-- **JavaScript** vanilla para animações e interações
-- **Google Fonts** para tipografia
-- **Font Awesome** ou **Lucide Icons** para ícones
-- Sem frameworks — código limpo e portável
-
-### Estrutura de Arquivos
+Conta cópias de prompts e downloads de PDFs.
 
 ```
-meu-site/
-├── CLAUDE.md          ← este arquivo (briefing)
-├── index.html         ← página principal
-├── style.css          ← todos os estilos
-├── script.js          ← animações e interações
-└── assets/
-    ├── imagens/       ← foto de perfil, logos
-    └── icons/         ← ícones personalizados se necessário
+counter.php          ← endpoint GET (lê) e POST (incrementa) com flock pra atomicidade
+counters.json        ← persistência { "id-1": N, "id-2": M, ... }
+counter-client.js    ← cliente JS: auto-load no DOMContentLoaded + window.incrementCounter(id)
+prompts.js           ← chama window.incrementCounter ao copiar prompt
+downloads.js         ← chama window.incrementCounter ao clicar em qualquer <a>/<button data-counter-id>
 ```
 
----
+**Pra adicionar contador em algo novo:**
 
-## Boas Práticas (sempre seguir)
+1. No HTML, no display: `<span class="counter-value" data-counter-id="meu-id">0</span>`
+2. No gatilho (link ou botão): `data-counter-id="meu-id"`
+3. Garantir que a página carrega `counter-client.js` (e `downloads.js` se for um gatilho de download)
+4. `id` aceito pelo PHP: regex `^[a-zA-Z0-9_-]+$`, máx 80 chars
 
-- Código comentado em **português**
-- HTML semântico (`<section>`, `<article>`, `<nav>`, etc.)
-- Site **responsivo** para mobile, tablet e desktop
-- **Meta tags** para SEO (título, descrição, Open Graph para LinkedIn)
-- Carregamento rápido — sem imagens pesadas sem otimização
-- Acessibilidade básica: `alt` em imagens, contraste adequado
+A animação "bump" no número vem da classe `.counter-value.bump` (definida em `prompts.css` e `downloads.css`).
 
----
+## Padrões de conteúdo
 
-## Instruções para Atualizações Futuras
+Três tipos de conteúdo, cada um com seu padrão:
 
-Quando Gustavo pedir para atualizar o site, sempre:
-1. Manter a estrutura de arquivos existente
-2. Adicionar nova certificação na seção de certificações (com mês/ano)
-3. Adicionar novos projetos de IA como cards na seção específica
-4. Não alterar o design base sem solicitação explícita
-5. Manter o código comentado em português
+### Projetos (`projeto-*.html` + `projeto-detalhe.css`)
+5 páginas hoje. Cada projeto = 1 HTML com hero + métricas + blocos de "Desafio/Solução/Como funcionou/Aprendizados" + stack + CTAs. Cards do `index.html` na seção IA linkam pra elas.
 
----
+### Materiais / Downloads (`downloads.html` + `download-<slug>.html` + `downloads.css` + `downloads.js`)
+- `downloads.html` = galeria; cards usam ícone PDF (não imagem) + badge categoria + contador no rodapé
+- `download-<slug>.html` = página de detalhe com botão grande de download + contador "N pessoas já baixaram" + CTA Substack
+- PDFs ficam em `downloads/<arquivo>.pdf`
+- `data-counter-id` no `<a download>` dispara o increment
 
-## Tom de Voz do Site
+### Prompts (`prompts.html` + `prompts.css` + `prompts.js`)
+Galeria única com filtro por categoria (chips). Cada prompt = um `<article class="prompt-card">` com:
+- Header (categoria + modelo + título + descrição)
+- Bloco "Como usar" (lista `<ol>` de 3-6 passos)
+- Pills com variáveis a preencher
+- `<pre><code id="prompt-X">` com o prompt
+- Footer com contador + botão Copiar
 
-- Direto e confiante — sem ser arrogante
-- Resultados com números concretos em destaque
+**Adicionar prompt novo:** duplicar `<article>`, ajustar `data-category`, id do `<code>`, `data-target` do botão, `data-counter-id` em dois lugares (counter display e botão). Se categoria inédita, descomentar o chip correspondente em `.prompts-filters` (5 categorias já listadas: discovery, escrita, analise, codigo, produtividade).
+
+## Navegação global
+
+Todas as páginas têm a mesma navbar com 9 itens fixos: `Sobre · IA · Newsletter · Downloads · Prompts · Experiência · Formação · Canais · Contato`. **Ao adicionar uma página nova que precisa do menu**, copiar a `<nav class="navbar">` de uma página existente — não esquecer de marcar `class="active"` no link da página corrente (estilo definido em `prompts.css` e `downloads.css`).
+
+## Identidade visual (tokens em `:root` de `style.css`)
+
+- Fundo: `#0A0A0A` (primary), `#111111`/`#1A1A1A` (cards)
+- Accent: `#6366F1` (índigo) — usado pra CTA, badges, bordas ativas
+- Texto: `#F5F5F5` (primary), `#A3A3A3` (secondary), `#525252` (muted)
+- Bordas: `#2A2A2A`
+- Fontes: **Plus Jakarta Sans** (headings) + **Inter** (body), via Google Fonts
+- Ícones: **Font Awesome 6.5.1** via CDN
+- Componentes: glass-card (borda sutil + leve transparência), gradient-accent (CTA), gradient-hero (radial roxo no topo de cada hero)
+
+Não inventar cor nova nem trocar fonte sem pedido explícito.
+
+## Tom de voz pra conteúdo do site
+
+- Direto e confiante, **sem ser arrogante**
+- Números concretos em destaque ("R$100B+", "85%", "–7 min", "100 prompts")
 - Linguagem acessível — não muito técnica, não muito corporativa
 - Transmite: **credibilidade + curiosidade + inovação**
+- Posicionamento: Product Manager → AI Product Builder (12+ anos em produtos financeiros, agora aprendendo IA aplicada a produto)
+
+## Contato do Gustavo (pra referência em conteúdo)
+
+- LinkedIn: https://www.linkedin.com/in/gustavoluizsilva/
+- Newsletter Substack: https://gustluiz.substack.com/
+- Email: gu.ufabc@gmail.com
