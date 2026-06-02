@@ -2067,13 +2067,27 @@ strong {
   height: 48px;
   flex-shrink: 0;
   border-radius: var(--radius-sm);
-  background: rgba(99, 102, 241, 0.12);
-  border: 1px solid rgba(99, 102, 241, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: var(--transition);
 }
 
+.stack-item:hover .stack-icon {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--border-hover);
+}
+
+.stack-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Fallback: ainda suporta uso com <i> (Font Awesome) se voltarmos */
 .stack-icon i {
   font-size: 1.2rem;
   color: var(--accent);
