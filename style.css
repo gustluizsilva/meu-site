@@ -1869,6 +1869,218 @@ strong {
   border-radius: 4px;
 }
 
+/* ============================================================
+   SEÇÃO MÉTRICAS — social proof logo após o hero
+   ============================================================ */
+.section-metricas {
+  padding: 60px 0 40px;
+}
+
+.metricas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.metrica-card-big {
+  padding: 28px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.metrica-valor-big {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.6vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1;
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+.metrica-label-big {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  max-width: 240px;
+}
+
+/* ============================================================
+   SEÇÃO RECURSOS GRATUITOS — Downloads + Prompts em destaque
+   ============================================================ */
+.recursos-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.recurso-card {
+  padding: 36px 32px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: var(--transition);
+}
+
+.recurso-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.recurso-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.recurso-card-icon i {
+  font-size: 1.6rem;
+  color: var(--accent);
+}
+
+.recurso-card-titulo {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.recurso-card-desc {
+  font-size: 0.96rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.recurso-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 4px;
+  transition: gap 0.2s ease;
+}
+
+.recurso-card:hover .recurso-card-cta {
+  gap: 12px;
+}
+
+/* ============================================================
+   SEÇÃO DAILY STACK — grid de ferramentas que uso
+   ============================================================ */
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.stack-item {
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: var(--transition);
+}
+
+.stack-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.stack-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stack-icon i {
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.stack-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.stack-name {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stack-use {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* ============================================================
+   RESPONSIVO PRAS NOVAS SEÇÕES
+   ============================================================ */
+@media (max-width: 900px) {
+  .metricas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .recursos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-metricas {
+    padding: 40px 0 24px;
+  }
+
+  .metricas-grid {
+    gap: 12px;
+  }
+
+  .metrica-card-big {
+    padding: 22px 14px;
+  }
+
+  .metrica-valor-big {
+    font-size: clamp(1.8rem, 7vw, 2.2rem);
+  }
+
+  .metrica-label-big {
+    font-size: 0.78rem;
+  }
+
+  .recurso-card {
+    padding: 28px 22px;
+  }
+
+  .stack-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Redução de movimento para quem preferir */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
